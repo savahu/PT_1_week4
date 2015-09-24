@@ -7,14 +7,16 @@ import com.qc.qcrobot.lib.pipefilter.InterfacePipe;
  *
  * @author sander
  */
-public class BloodPressureFilter extends AbstractPipeFilter<BloodPressureLevel, Enum> {
+public class BloodPressureFilter extends AbstractPipeFilter<BloodPressure, Enum> {
 
 	public BloodPressureFilter(InterfacePipe<Enum> output) {
 		super(output);
 	}
 
 	@Override
-	public void filter(BloodPressureLevel input, InterfacePipe<Enum> output) {
+	public void filter(BloodPressure input, InterfacePipe<Enum> output) {
+                BloodPressureStorage storage = BloodPressureStorage.getInstance();
+                storage.StoreBloodPressureLevel(input);
                 if(input.getDiastolicValue() <= 80 && input.getSystolicValue() <= 120) // Blood pressure is 120/80 or below
                 {
                     output.write(BloodPressureEnum.Healthy);
