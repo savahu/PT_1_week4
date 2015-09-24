@@ -10,25 +10,23 @@ import org.apache.commons.lang.time.DateUtils;
  *
  * @author Dominique
  */
-public class Medicationfilter  extends AbstractPipeFilter<Date, Boolean>{
-    
-    public Medicationfilter(InterfacePipe<Boolean> output)
-    {
+public class Medicationfilter extends AbstractPipeFilter<MedicationSettings, Boolean> {
+
+    public Medicationfilter(InterfacePipe<Boolean> output) {
         super(output);
     }
 
     @Override
-    protected void filter(Date input, InterfacePipe<Boolean> output) {
-        Date deadline = DateUtils.addHours(input, 2);
-         java.util.Date date = new java.util.Date();
+    protected void filter(MedicationSettings input, InterfacePipe<Boolean> output) {
+        
+        Date deadline = DateUtils.addHours(input.getMedicationTime(), 2);
+        java.util.Date date = new java.util.Date();
         java.util.Date datetime = new Timestamp(date.getTime());
-        if(datetime.after(deadline))
-                {
-                    output.write(true);
-                }
-        else
-        {
+        if (datetime.after(deadline) && input.MedicationGiven == false) {
+            // call method to dispense medication and sets the MedicationGiven boolean to true;
             output.write(false);
+        } else {
+            output.write(true);
         }
     }
 }

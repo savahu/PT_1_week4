@@ -1,5 +1,7 @@
 package com.qc.qcrobot.lib.pipefilter.Medication;
 
+import java.util.Date;
+
 /**
  *
  * @author Dominique
@@ -8,7 +10,7 @@ public class MedicationSettings
 {
     boolean MedicationGiven = false;
     private static MedicationSettings instance = null;
-    private String time; 
+    private Date time; 
     
     
     public static MedicationSettings getInstance()
@@ -20,14 +22,18 @@ public class MedicationSettings
     }
 
   
-    public void setMedicationTime()
+    public void setMedicationTime(Date medicationTime)
     {
-        String datetime = "12:00";
-        this.time = datetime;
+        this.time = medicationTime;
     }
     
-    public String getMedicationTime()
+    public Date getMedicationTime()
     {
         return this.time;
+    }
+    
+    public Boolean getMedicationStatus()
+    {
+        return this.MedicationGiven;
     }
 }
