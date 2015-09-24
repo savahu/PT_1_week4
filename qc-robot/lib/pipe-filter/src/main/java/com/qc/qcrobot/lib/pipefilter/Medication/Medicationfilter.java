@@ -1,26 +1,34 @@
 package com.qc.qcrobot.lib.pipefilter.Medication;
 
+import com.qc.qcrobot.lib.pipefilter.AbstractPipeFilter;
+import com.qc.qcrobot.lib.pipefilter.InterfacePipe;
 import java.sql.Timestamp;
 import java.util.Date;
+import org.apache.commons.lang.time.DateUtils;
 
 /**
  *
  * @author Dominique
  */
-public class Medicationfilter {
+public class Medicationfilter  extends AbstractPipeFilter<Date, Boolean>{
     
-    public Medicationfilter()
+    public Medicationfilter(InterfacePipe<Boolean> output)
     {
-        
+        super(output);
     }
-    
-    public String timeSettings()
-    {
-        java.util.Date date= new java.util.Date();
+
+    @Override
+    protected void filter(Date input, InterfacePipe<Boolean> output) {
+        Date deadline = DateUtils.addHours(input, 2);
+         java.util.Date date = new java.util.Date();
         java.util.Date datetime = new Timestamp(date.getTime());
-        String time = datetime.toString().substring(datetime.toString().length() - 12);
-        return time;
+        if(datetime.after(deadline))
+                {
+                    output.write(true);
+                }
+        else
+        {
+            output.write(false);
+        }
     }
-    
-    
 }

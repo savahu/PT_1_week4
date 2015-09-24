@@ -7,29 +7,27 @@ package com.qc.qcrobot.lib.pipefilter.Medication;
 public class MedicationSettings 
 {
     boolean MedicationGiven = false;
+    private static MedicationSettings instance = null;
+    private String time; 
     
     
-    public MedicationSettings()
+    public static MedicationSettings getInstance()
     {
-        
+        if (instance == null) {
+            instance = new MedicationSettings();
+        }
+        return instance;
     }
-    
+
   
-    public void MedicationTime()
+    public void setMedicationTime()
     {
-        
+        String datetime = "12:00";
+        this.time = datetime;
     }
     
-    
-//    public void filter(BloodPressureLevel input, InterfacePipe<Enum> output) {
-//                if(input.getDiastolicValue() <= 80 && input.getSystolicValue() <= 120) // Blood pressure is 120/80 or below
-//                {
-//                    output.write(BloodPressureEnum.Healthy);
-//                }
-//                else if (input.getDiastolicValue() <= 89 && input.getSystolicValue() <= 139)
-//                        {
-//                            output.write(BloodPressureEnum.Prehypertension);
-//                        }
-//                else if (input.getDiastolicValue() <= 99 && input.getSystolicValue() <= 159)
-//                {
+    public String getMedicationTime()
+    {
+        return this.time;
+    }
 }
