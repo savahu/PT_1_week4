@@ -8,7 +8,7 @@ import com.qc.qcrobot.lib.pipefilter.InterfacePipe;
  * @author sander
  */
 public class BloodPressureFilter extends AbstractPipeFilter<BloodPressure, Enum> {
-
+    
 	public BloodPressureFilter(InterfacePipe<Enum> output) {
 		super(output);
 	}
