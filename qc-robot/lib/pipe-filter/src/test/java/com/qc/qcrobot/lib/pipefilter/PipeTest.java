@@ -3,6 +3,7 @@ package com.qc.qcrobot.lib.pipefilter;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import junit.framework.Assert;
 
 /**
  * Unit test for pipe-filter.
@@ -41,7 +42,7 @@ public class PipeTest extends TestCase {
     	source.stopPipe();
 		source.joinPipe();
     	
-    	assertEquals("test", sink.outputString);
+    	Assert.assertEquals("test", sink.outputString);
     }
 
     /**
